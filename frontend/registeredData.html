@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Registered data</h1>
+    <button type="button" onclick="viewData()">View Data</button> <br>
+     enter the id for delete:<input id="dlt">
+     <button onclick="deletedata()"> delete</button>
+    <div id="responseContainer">
+        <h2>Response:</h2>
+        <div id="responseData"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        
+function viewData() {
+  axios.get("http://localhost:5500/getData")
+    .then(function (response) {
+      let details = response.data;
+      
+      responseData.innerHTML = `
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State / Country</th>
+              <th>Payment</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      `;
+      let tableBody = document.getElementById("tableBody");
+
+      details.map(item => {
+        tableBody.innerHTML += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.email}</td>
+            <td>${item.address}</td>
+            <td>${item.city}</td>
+            <td>${item.statecountry}</td>
+            <td>${item.payment}</td>
+          </tr>
+       `;
+      });
+
+    })
+}
+
+       function deletedata(){
+            let data=dlt.value
+            axios.delete(`http://localhost:5500/deleteData/${data}`)
+            .then(function (response) {
+                console.log(response.data)
+            })
+        }
+
+    </script>
+</body>
+
+</html>

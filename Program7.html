@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
+    <form action="" id="Regform">
+    <label>Name:</label> <br>
+    <input type="text" id="Fullname" required><br>
+    <label>usernName:</label><br>
+    <input type="text" id="userName" required><br>
+    <label>Email:</label><br>
+    <input type="email" id="Email" required><br>
+    <label>Pno:</label><br>
+    <input type="number" id="phno" required><br>
+   
+    <input type="button" id="btn" value="submit" onclick="registerUser()"><br>
+    <script>
+     function registerUser(){ 
+        const reg_api = "https://jsonplaceholder.typicode.com/users";
+        const formData={
+            name: Fullname.value,
+            username: userName.value,
+            email: Email.value,
+            phoneNumber: phno.value
+        };
+        console.log(formData);
+
+        
+       axios.post(reg_api,formData)
+       .then(function (respose){
+        console.log(JSON.stringify(respose.data))
+        console.log(respose);
+       })
+     }
+
+    </script>
+
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <form action="" id="Registration">
+        <label>Name:</label><br>
+        <input type="text" id="UserName"><br>
+        <label>genter:</label><br>
+        <input type="text" id="Gender1"><br>
+        <label >Date of Birth:</label><br>
+        <input type="date" id="Date1"><br>
+        <label >Email:</label><br>
+        <input type="email" id="Email1"><br>
+        <label >Password:</label> <br>
+        <input type="password" id="pass"><br>
+        <input type="button" value="submint" onclick="reg()">
+
+        </form>
+        <script>
+      function reg(){
+        const reg_api = "http://localhost:5500/Data";
+        const formData={
+            name:UserName.value,
+            gender: Gender1.value,
+            dob:Date1.value,
+            email:Email1.value,
+            password: pass.value
+        }
+        console.log(formData);
+
+      axios.post(reg_api, formData)
+      .then(function (response){
+        console.log(JSON.stringify(response.data))
+        console.log(response);
+      })
+      }
+        </script>
+
+
+    
+</body>
+</html>
